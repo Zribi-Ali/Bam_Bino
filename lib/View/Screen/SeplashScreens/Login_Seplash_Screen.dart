@@ -32,7 +32,7 @@ class _SeplashScreenLoginState extends State<SeplashScreenLogin> {
         if (alreadyUsed == true) {
           Get.offNamed("/lang");
         } else {
-          Get.offNamed("/ScreenIntroduction");
+          Get.offNamed("/preConnexion");
         }
       },
     );

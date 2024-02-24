@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Style {
   TextStyle styleBoldTitle = TextStyle(
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: FontWeight.bold,
     color: ConstantColor().darkbluedark,
   );
@@ -41,6 +41,12 @@ class Style {
   TextStyle styleTextGray = TextStyle(
     fontSize: 14,
     color: ConstantColor().grey2,
+    fontWeight: FontWeight.w700,
+  );
+
+  TextStyle styleTextDescription = TextStyle(
+    fontSize: 14,
+    color: Colors.white,
     fontWeight: FontWeight.w700,
   );
 }

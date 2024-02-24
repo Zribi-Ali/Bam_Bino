@@ -6,8 +6,10 @@ import '../../../Setting/Colors/colorsSetting.dart';
 import '../../Widget/TextStyle.dart';
 import 'NewPassword_Screen.dart';
 
+// ignore: must_be_immutable
 class CodeVerificationPassword extends StatefulWidget {
-  const CodeVerificationPassword({super.key});
+  CodeVerificationPassword({super.key, required this.pageName});
+  String pageName;
 
   @override
   State<CodeVerificationPassword> createState() =>
@@ -92,10 +94,13 @@ class _CodeVerificationPasswordState extends State<CodeVerificationPassword> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NewPassword()));
+                        print(widget.pageName);
+                        widget.pageName == "Singup"
+                            ? Get.offAllNamed('/home')
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NewPassword()));
                       },
                       child: FittedBox(
                         child: Text(

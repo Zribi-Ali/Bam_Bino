@@ -118,7 +118,7 @@ class UserController extends GetxController {
       emptyController();
       showError(false);
       isLoggedIn(true);
-      Get.offAllNamed('/home');
+
       isLoggedIn(false);
     } /* else {
         errorMsg = "Incorrect Username or Password!";
@@ -184,7 +184,7 @@ class UserController extends GetxController {
     prefs.remove('photo');
     prefs.remove('email');
     prefs.remove('password');
-    Get.offAllNamed('/login');
+    Get.offAllNamed('/preConnexion');
   }
 }
 

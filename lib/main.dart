@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'View/Pages/Luncher_Page.dart';
+import 'View/Screen/LoginSignin/PreConnexion_Screen.dart';
 import 'View/Screen/LoginSignin/ProfileSignin_Screen.dart';
 import 'View/Screen/Longue_Screen.dart';
 import 'View/Screen/SeplashScreens/Home_Seplash_Screen.dart';
@@ -33,6 +34,7 @@ Future<void> main() async {
         GetPage(name: '/signIn', page: () => const SignUpScreen()),
         GetPage(name: '/lang', page: () => const LongueScreen()),
         GetPage(name: '/signInProfile', page: () => const SignInProfile()),
+        GetPage(name: '/preConnexion', page: () => const PreConnexionScreen()),
         GetPage(
             name: '/ScreenIntroduction',
             page: () => const ScreenIntroduction()),

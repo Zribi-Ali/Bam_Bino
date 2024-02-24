@@ -13,6 +13,7 @@ import '../../Widget/InputFilde_Widget.dart';
 import 'package:intl/intl.dart';
 
 import '../../Widget/TextStyle.dart';
+import '../ForgetPassword/Forget_Email_Screen.dart';
 
 class SignInProfile extends StatefulWidget {
   const SignInProfile({super.key});
@@ -243,7 +244,13 @@ class _SignInProfileState extends State<SignInProfile> {
                             ),
                           ),
                           onPressed: () {
-                            _showMyDialog();
+                            //_showMyDialog();
+                            _userController.SignedIn2();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ForgetPassworEmail()));
                           },
                           child: Text(
                             "Sauvegarder".tr,
