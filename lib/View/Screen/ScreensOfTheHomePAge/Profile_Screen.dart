@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bambino/Model/user_model.dart';
 import 'package:bambino/View/Screen/ScreensOfTheHomePAge/ProfileScreens/Favorites_Screen.dart';
 import 'package:bambino/View/Screen/ScreensOfTheHomePAge/ProfileScreens/Setting_Screen.dart';
 import 'package:bambino/View/Widget/TextStyle.dart';
@@ -11,6 +10,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Controller/States/User_Controller.dart';
+import '../../../Model/Classes/user_model.dart';
 import '../../../Setting/Colors/colorsSetting.dart';
 import '../../Widget/ListTile_Widget.dart';
 
@@ -146,10 +146,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: Get.height * .02,
               ),
-              Text(
-                "+216 99 999 999",
-                style: Style().styleBoldDiscription,
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: listTileWidget(
@@ -201,8 +197,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  PersistentBottomSheetController<dynamic>? _showBottomSheet() {
-    PersistentBottomSheetController<dynamic>? bottomSheetController;
+  PersistentBottomSheetController? _showBottomSheet() {
+    PersistentBottomSheetController? bottomSheetController;
     UserController _userController = UserController();
     bottomSheetController = showBottomSheet(
       context: context,

@@ -1,10 +1,10 @@
-import 'package:bambino/Model/doctor_model.dart';
 import 'package:bambino/Setting/Colors/colorsSetting.dart';
 import 'package:bambino/View/Widget/TextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../Model/Classes/doctor_model.dart';
 import '../Screen/ScreensOfTheHomePAge/Doctor&Appointment/DoctorDetails_Screen.dart';
 
 // ignore: must_be_immutable
@@ -35,7 +35,7 @@ class _DoctorCardWidgetState extends State<DoctorCardWidget> {
         height: Get.width * 0.45,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: ConstantColor().grey1,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(

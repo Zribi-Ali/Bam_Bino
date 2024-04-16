@@ -2,22 +2,25 @@
 
 import 'dart:math';
 
-import 'package:bambino/Model/Hospital.dart';
-import 'package:bambino/Model/doctor_model.dart';
 import 'package:bambino/Setting/Lists/DoctorList.dart';
 import 'package:bambino/Setting/Lists/Hospitals.dart';
 import 'package:bambino/View/Widget/TextStyle.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+//import 'package:ionicons/ionicons.dart';
+import 'package:table_calendar/table_calendar.dart';
 
+import '../../../Model/Classes/Hospital.dart';
+import '../../../Model/Classes/doctor_model.dart';
 import '../../../Setting/Colors/colorsSetting.dart';
-import '../../Widget/CardHomeDoctor_Widget.dart';
 import '../../Widget/CardHomeHospitolWidget.dart';
+import '../../Widget/CicleBirth.dart';
+import '../../Widget/ConseilleWidget.dart';
 import '../../Widget/DoctorListCardWidget.dart';
-import '../../Widget/InputFilde_Widget.dart';
+//import '../../Widget/InputFilde_Widget.dart';
+import '../home/Fondatteur.dart';
 import 'Doctor&Appointment/DoctorDetails_Screen.dart';
 import 'Doctor&Appointment/DoctorList_Screen.dart';
 
@@ -29,50 +32,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List conseiller = [
-    "conseille1".tr,
-    "conseille2".tr,
-    "conseille3".tr,
-    "conseille4".tr,
-    "conseille5".tr,
-    "conseille6".tr,
-    "conseille7".tr,
-    "conseille8".tr,
-    "conseille9".tr,
-    "conseille10".tr,
-  ];
-
   late int randomNumber;
   void random() {
     Random random = Random();
     randomNumber = random.nextInt(8);
   }
 
-  PageController _controller = PageController();
   TextEditingController LastDateController = TextEditingController();
-  DateTime dateActuelle = DateTime.now();
+
   String birthDate = "";
+  int birthInWeeks = 0;
   final format = DateFormat("yyyy-MM-dd");
   DateTime selectedDate = DateTime.now();
-  int differenceEnMois = 10;
+
+  int differenceEnMois = 0;
+  int currentWeekNumber = 0;
   void addMonths(date) {
     birthDate = format.format(date
-        .add(const Duration(days: 7))
+        .add(const Duration(
+          days: 372,
+        ))
         .subtract(const Duration(days: 3 * 31)));
-    //birthDate = format.format(date.add(Duration(days: 280)));
-    differenceEnMois = differenceMois(dateActuelle, selectedDate);
-    setState(() {});
-  }
 
-  int differenceMois(DateTime date1, DateTime date2) {
-    int moisDifference = 0;
+    DateTime currentDate = DateTime.now();
+    DateTime selectedBirthDate = DateTime.parse(birthDate);
+    int ageInDays = currentDate.difference(selectedBirthDate).inDays * -1;
+    birthInWeeks = ageInDays ~/ 7;
 
-    while (date1.isAfter(date2)) {
-      date2 = date2.add(const Duration(days: 30)); // Environ 30 jours par mois
-      moisDifference++;
+    // Calculate the current week number
+    int daysSinceSelected = currentDate.difference(date).inDays;
+    currentWeekNumber = (daysSinceSelected / 7).ceil();
+    if ((0 < currentWeekNumber) && (currentWeekNumber <= 12)) {
+      differenceEnMois = 1;
+    } else if ((12 < currentWeekNumber) && (currentWeekNumber <= 25)) {
+      differenceEnMois = 2;
+    } else {
+      differenceEnMois = 3;
     }
 
-    return moisDifference;
+    setState(() {});
   }
 
   @override
@@ -81,240 +79,257 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-/*       if (publication.content.length > 50) {
-      firstHalf = publication.content.substring(0, 50);
-      secondHalf =
-          publication.content.substring(50, publication.content.length);
-    } else {
-      firstHalf = publication.content;
-      secondHalf = "";
-    }
- */
+  List<String> con1 = ["conseille1".tr, "conseille2".tr, "conseille3".tr];
+  List<String> con2 = ["conseille4".tr, "conseille5".tr, "conseille6".tr];
+  List<String> con3 = ["conseille7".tr, "conseille8".tr, "conseille9".tr];
+
   @override
   Widget build(BuildContext context) {
-    HospitalList _hospitalList = HospitalList();
-    DoctorList _doctorList = DoctorList();
+    HospitalList hospitalList = HospitalList();
+    DoctorList doctorList = DoctorList();
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ConstantColor().pink.withOpacity(.2),
         body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: Get.height * 0.25,
-                    color: Colors.transparent,
-                    child: Stack(
-                      children: [
-                        PageView(
-                          controller: _controller,
-                          onPageChanged: (indexPage) {},
-                          children: [
-                            cardHomeDoctorImageWidget("assets/Image8.png"),
-                            cardHomeDoctorImageWidget("assets/Image8.png"),
-                            cardHomeDoctorImageWidget("assets/Image8.png")
-                          ],
-                        ),
-                        Container(
-                          alignment: const Alignment(0, 0.9),
-                          child: SmoothPageIndicator(
-                            controller: _controller,
-                            count: 3,
-                            effect: ExpandingDotsEffect(
-                                dotColor: ConstantColor().grey1,
-                                activeDotColor: ConstantColor().grey2,
-                                dotHeight: 10,
-                                dotWidth: 10),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: TextField(
-                      readOnly: true,
-                      textInputAction: TextInputAction.none,
-                      controller: LastDateController,
-                      decoration: DecorationWidget(
-                        context,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Fondateur(),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
                         "lastdate".tr,
-                        Ionicons.calendar,
+                        style: Style().styleBold1,
                       ),
-                      onTap: () async {
-                        {
-                          final DateTime? dateTime = await showDatePicker(
-                              context: context,
-                              initialDate: selectedDate,
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2050));
-                          if (dateTime != null) {
-                            setState(() {
-                              selectedDate = dateTime;
-                              LastDateController.text =
-                                  DateFormat("yyyy-MM-dd").format(selectedDate);
-                            });
-                          }
-                        }
-                        addMonths(selectedDate);
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18),
-                    child: birthDate == ""
-                        ? const Text(
-                            "Date d'accouchment : ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                          )
-                        : Text(
-                            "Date d'accouchment : $birthDate",
-                          ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  LastDateController.text != ""
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 18),
-                          child: differenceEnMois >= 0 && differenceEnMois <= 3
-                              ? Column(
-                                  children: [
-                                    Text("conseille1".tr),
-                                    Text("conseille2".tr),
-                                    Text("conseille3".tr),
-                                  ],
-                                )
-                              : differenceEnMois >= 4 && differenceEnMois <= 6
-                                  ? Column(
-                                      children: [
-                                        Text("conseille4".tr),
-                                        Text("conseille5".tr),
-                                        Text("conseille6".tr),
-                                      ],
-                                    )
-                                  : Column(
-                                      children: [
-                                        Text("conseille7".tr),
-                                        Text("conseille8".tr),
-                                        Text("conseille9".tr),
-                                      ],
-                                    ),
-                        )
-                      : const SizedBox(
-                          height: 5,
-                          width: double.infinity,
+                      TableCalendar(
+                        focusedDay: selectedDate,
+                        locale: Localizations.localeOf(context).languageCode,
+                        firstDay: DateTime(2023),
+                        lastDay: DateTime.now(),
+                        headerStyle: const HeaderStyle(
+                          formatButtonVisible: false,
+                          titleCentered: true,
                         ),
-                  ListTile(
-                    leading: Text(
-                      "Centres".tr,
-                      style: Style().styleBold1,
-                    ),
-                    trailing: TextButton(
-                      child: Text(
-                        "SeeAll".tr,
-                        style: Style().styleW4001,
+                        calendarStyle: CalendarStyle(
+                          todayDecoration: BoxDecoration(
+                            color: ConstantColor().blue,
+                            shape: BoxShape.circle,
+                          ),
+                          selectedDecoration: BoxDecoration(
+                            color: ConstantColor().pink,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        availableGestures: AvailableGestures.all,
+                        weekNumbersVisible: true,
+                        daysOfWeekHeight: 24,
+                        //calendarFormat: CalendarFormat.month,
+                        selectedDayPredicate: (DateTime date) {
+                          return isSameDay(selectedDate, date);
+                        },
+                        onDaySelected:
+                            (DateTime selectedDay, DateTime focusedDay) {
+                          setState(() {
+                            selectedDate = selectedDay;
+                            LastDateController.text =
+                                DateFormat("yyyy-MM-dd").format(selectedDate);
+                            addMonths(selectedDay);
+                          });
+                        },
                       ),
-                      onPressed: () {}, //here ********************************
-                    ),
+                    ],
                   ),
-                  SizedBox(
-                    height: Get.height * .28,
-                    child: FutureBuilder<List<Hospital>>(
-                      future: Future.value(_hospitalList.hospital),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          return Text('Error: ${snapshot.error}');
-                        } else {
-                          return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 3,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: CardHomeHospitolWidget(
-                                    snapshot.data![index].image,
-                                    snapshot.data![index].name),
-                              );
-                            },
-                          );
+                ),
+                /* Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: TextField(
+                    readOnly: true,
+                    textInputAction: TextInputAction.none,
+                    controller: LastDateController,
+                    decoration: DecorationWidget(
+                      context,
+                      "lastdate".tr,
+                      Ionicons.calendar,
+                    ),
+                    onTap: () async {
+                      {
+                        final DateTime? dateTime = await showDatePicker(
+                            context: context,
+                            initialDate: selectedDate,
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2050));
+                        if (dateTime != null) {
+                          setState(() {
+                            selectedDate = dateTime;
+                            LastDateController.text =
+                                DateFormat("yyyy-MM-dd").format(selectedDate);
+                          });
                         }
-                      },
-                    ),
+                      }
+                      addMonths(selectedDate);
+                    },
                   ),
-                  ListTile(
-                    leading: Text(
-                      "Doctors".tr,
-                      style: Style().styleBold1,
-                    ),
-                    trailing: TextButton(
-                      child: Text(
-                        "SeeAll".tr,
-                        style: Style().styleW4001,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const DoctorListScreen()));
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: Get.height * .25,
-                    //width: Get.width,
-                    child: FutureBuilder<List<Doctor>>(
-                      future: Future.value(_doctorList.doctors),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          return Text('Error: ${snapshot.error}');
-                        } else {
-                          return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 3,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DoctorDetailsScreen(
-                                        doctor: snapshot.data![index],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: DoctorListCardWidget(
-                                      snapshot.data![index], Get.width),
+                ), */
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: birthDate == ""
+                        ? const SizedBox(
+                            height: 10,
+                          )
+                        : build_CircleBirth(birthDate, context,
+                            currentWeekNumber, birthInWeeks)),
+                const SizedBox(
+                  height: 30,
+                ),
+                LastDateController.text != ""
+                    ? differenceEnMois == 1
+                        ? Center(
+                            child: CarouselSlider.builder(
+                              itemCount: con1.length,
+                              itemBuilder: (context, index, realIndex) {
+                                return buildConseille(con1[index], index);
+                              },
+                              options: CarouselOptions(
+                                height: MediaQuery.sizeOf(context).height * .43,
+                              ),
+                            ),
+                          )
+                        : differenceEnMois == 2
+                            ? Center(
+                                child: CarouselSlider.builder(
+                                  itemCount: con2.length,
+                                  itemBuilder: (context, index, realIndex) {
+                                    return buildConseille(con2[index], index);
+                                  },
+                                  options: CarouselOptions(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              .4),
                                 ),
-                              );
-                            },
-                          );
-                        }
-                      },
-                    ),
+                              )
+                            : Center(
+                                child: CarouselSlider.builder(
+                                  itemCount: con3.length,
+                                  itemBuilder: (context, index, realIndex) {
+                                    return buildConseille(con3[index], index);
+                                  },
+                                  options: CarouselOptions(
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              .4),
+                                ),
+                              )
+                    : const SizedBox(
+                        height: 5,
+                        width: double.infinity,
+                      ),
+                ListTile(
+                  leading: Text(
+                    "Centres".tr,
+                    style: Style().styleBold1,
                   ),
-                ],
-              ),
+                  trailing: TextButton(
+                    child: Text(
+                      "SeeAll".tr,
+                      style: Style().styleW4001,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                SizedBox(
+                  height: Get.width * .5,
+                  child: FutureBuilder<List<Hospital>>(
+                    future: Future.value(hospitalList.hospital),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: hospitalList.hospital.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: CardHomeHospitolWidget(
+                                  snapshot.data![index].image,
+                                  snapshot.data![index].name),
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ),
+                ListTile(
+                  leading: Text(
+                    "Doctors".tr,
+                    style: Style().styleBold1,
+                  ),
+                  trailing: TextButton(
+                    child: Text(
+                      "SeeAll".tr,
+                      style: Style().styleW4001,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DoctorListScreen()));
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height * .25,
+                  //width: Get.width,
+                  child: FutureBuilder<List<Doctor>>(
+                    future: Future.value(doctorList.doctors),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DoctorDetailsScreen(
+                                      doctor: snapshot.data![index],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: DoctorListCardWidget(
+                                    snapshot.data![index], Get.width),
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ),

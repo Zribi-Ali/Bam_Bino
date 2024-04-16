@@ -1,6 +1,7 @@
 import 'package:bambino/Setting/Colors/colorsSetting.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../Controller/States/AppLang_Controller.dart';
@@ -54,8 +55,8 @@ class _LongueScreenState extends State<LongueScreen> {
                             });
                           },
                           child: Container(
-                            height: Get.height * .19,
-                            width: Get.width * .37,
+                            height: Get.height * .2,
+                            width: Get.width * .5,
                             decoration: _isAR
                                 ? BoxDecoration(
                                     boxShadow: const [
@@ -75,9 +76,8 @@ class _LongueScreenState extends State<LongueScreen> {
                                 children: [
                                   CountryFlag.fromCountryCode(
                                     'TN',
-                                    borderRadius: 23,
-                                    height: Get.height * .12,
-                                    width: Get.width * .4,
+                                    height: Get.width * .25,
+                                    width: Get.width * .7,
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -107,8 +107,8 @@ class _LongueScreenState extends State<LongueScreen> {
                             });
                           },
                           child: Container(
-                            height: Get.height * .19,
-                            width: Get.width * .37,
+                            height: Get.height * .2,
+                            width: Get.width * .5,
                             decoration: _isFR
                                 ? BoxDecoration(
                                     boxShadow: const [
@@ -126,7 +126,6 @@ class _LongueScreenState extends State<LongueScreen> {
                                 children: [
                                   CountryFlag.fromCountryCode(
                                     'fr',
-                                    borderRadius: 23,
                                     height: Get.height * .12,
                                     width: Get.width * .4,
                                   ),
@@ -175,7 +174,7 @@ class _LongueScreenState extends State<LongueScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Get.offAllNamed('/login');
+                      Get.offAllNamed('/preConnexion');
                     },
                     child: Text(
                       "next".tr,

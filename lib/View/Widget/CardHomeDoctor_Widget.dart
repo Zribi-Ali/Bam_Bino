@@ -28,7 +28,7 @@ Card cardHomeDoctorImageWidget(String image) {
               child: Container(
                 height: Get.width * 0.5,
                 width: Get.width * 0.5,
-                color: Colors.grey.withOpacity(0.6),
+                color: Colors.grey.withOpacity(0.5),
               ),
             ),
           ),
@@ -38,10 +38,10 @@ Card cardHomeDoctorImageWidget(String image) {
   );
 }
 
-Card cardHomeDoctorTextWidget(String text) {
+Widget cardHomeDoctorTextWidget(String text) {
   return Card(
-    elevation: 1,
-    shadowColor: ConstantColor().grey2,
+    elevation: 3,
+    shadowColor: ConstantColor().blue,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20),
     ),
@@ -51,14 +51,13 @@ Card cardHomeDoctorTextWidget(String text) {
         children: [
           Container(
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
+              gradient: LinearGradient(
                 colors: [
-                  Color(0xff284f51),
-                  Color(0xff468680),
-                  Color(0xff65A299)
+                  ConstantColor().blue.withOpacity(0.2),
+                  ConstantColor().pink.withOpacity(0.3),
+                  ConstantColor().pink.withOpacity(0.5)
                 ], // Replace with your desired colors
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
+                end: Alignment.bottomCenter, begin: Alignment.topCenter,
               ),
               borderRadius: BorderRadius.circular(10.0),
             ),
@@ -68,7 +67,7 @@ Card cardHomeDoctorTextWidget(String text) {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
                 text,
-                style: Style().styleTextDescription,
+                style: Style().styleTextDescriptionFondateur,
               ),
             ),
           ),
@@ -79,7 +78,7 @@ Card cardHomeDoctorTextWidget(String text) {
               child: Container(
                 height: Get.width * 0.5,
                 width: Get.width * 0.5,
-                color: Colors.grey.withOpacity(0.3),
+                color: Colors.white.withOpacity(0.3),
               ),
             ),
           ),

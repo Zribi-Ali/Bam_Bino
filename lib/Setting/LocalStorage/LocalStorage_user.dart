@@ -9,8 +9,6 @@ class LocalStorageUser {
   ///Read
   ///le String peut fait des errers
   Future<String> get getUserFromStorage async {
-    return await GetStorage().read('user') == null
-        ? ''
-        : await GetStorage().read('user');
+    return await GetStorage().read('user') ?? '';
   }
 }

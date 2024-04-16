@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../doctor_model.dart';
+import '../Classes/doctor_model.dart';
 
 class DoctorProvider extends GetConnect {
   @override

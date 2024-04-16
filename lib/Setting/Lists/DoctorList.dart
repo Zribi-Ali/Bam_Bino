@@ -1,7 +1,7 @@
-import '../../Model/doctor_model.dart';
+import '../../Model/Classes/doctor_model.dart';
 
 class DoctorList {
-  final List<Doctor> doctors = [
+  List<Doctor> doctors = [
     Doctor(
         fullName: "Ali Zribi",
         lacation: "Gafsa",

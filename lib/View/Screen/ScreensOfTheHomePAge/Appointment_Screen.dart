@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../AppointmentScreens/CancelledScreen.dart';
+import '../AppointmentScreens/CompletedScreen.dart';
+import '../AppointmentScreens/UpcomingScreen.dart';
 
 class AppointmentScreen extends StatefulWidget {
   const AppointmentScreen({super.key});
@@ -10,14 +15,25 @@ class AppointmentScreen extends StatefulWidget {
 class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text("myBookings".tr),
+          ),
+          bottom: TabBar(tabs: <Widget>[
+            Tab(text: "Upcoming".tr),
+            Tab(text: "Completed".tr),
+            Tab(text: "Cancelled".tr),
+          ]),
+        ),
+        body: TabBarView(
           children: [
-            Text(
-              "Appointment Screen",
-              style: TextStyle(fontSize: 30),
-            )
+            UpComingScreen(),
+            CompletedScreen(),
+            CancelledScreen(),
           ],
         ),
       ),

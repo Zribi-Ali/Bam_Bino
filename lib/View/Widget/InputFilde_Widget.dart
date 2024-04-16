@@ -21,7 +21,7 @@ TextFormField textFormFieldWidget(context, controller, type, labele, icon,
 
 InputDecoration DecorationWidget(BuildContext context, String text, icon) {
   return InputDecoration(
-    fillColor: ConstantColor().grey1,
+    fillColor: ConstantColor().grey1.withOpacity(.2),
     filled: true,
     prefixIcon: Padding(
       padding: const EdgeInsets.fromLTRB(15, 13, 3, 13),
@@ -41,10 +41,12 @@ InputDecoration DecorationWidget(BuildContext context, String text, icon) {
     contentPadding: EdgeInsets.zero,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(
-        width: 2,
-        color: Colors.pink,
-      ),
+      borderSide: const BorderSide(color: Color.fromARGB(255, 214, 214, 214)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.pink),
+      gapPadding: 1.0,
+      borderRadius: BorderRadius.circular(14),
     ),
   );
 }

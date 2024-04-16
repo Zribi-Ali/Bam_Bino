@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _myList = const [
     HomeScreen(),
-    LocationScreen(),
+    QuarterlyAppointmentScreen(),
     AppointmentScreen(),
     ProfileScreen()
   ];
@@ -50,9 +50,7 @@ class _HomePageState extends State<HomePage> {
                 selectedItem == 0 ? Ionicons.home : Ionicons.home_outline,
               ),
               _tabItem(
-                selectedItem == 1
-                    ? Ionicons.location
-                    : Ionicons.location_outline,
+                selectedItem == 1 ? Ionicons.medical : Ionicons.medical_outline,
               ),
               _tabItem(
                 selectedItem == 2

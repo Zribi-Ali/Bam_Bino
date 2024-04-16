@@ -1,8 +1,8 @@
-import 'package:bambino/Model/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Widget/DoctorCard_Widget.dart';
+import '../../../../Model/Classes/doctor_model.dart';
+import '../../../Widget/DoctorListCardWidget.dart';
 import '../../../Widget/TextStyle.dart';
 
 // ignore: must_be_immutable
@@ -19,7 +19,12 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Dr, ${widget.doctor.fullName}")),
+        title: Center(
+          child: Text(
+            "Dr, ${widget.doctor.fullName}",
+            style: Style().styleDoctorName,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(13.0),
@@ -28,9 +33,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DoctorCardWidget(
-                doctor: widget.doctor,
-              ),
+              DoctorListCardWidget(widget.doctor, Get.width),
               const SizedBox(
                 height: 30,
               ),

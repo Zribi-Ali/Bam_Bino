@@ -73,21 +73,44 @@ const Map<String, String> fr = {
   "Aboutme": "À propos de moi",
   "WorkingTime": "Temps de travail",
   "accouchement": "Date d'accouchement",
+  "appointment": "Rendez-vous",
+  "Upcoming": "À venir",
+  "Completed": "Terminé",
+  "Cancelled": "Annulé",
+  "Reschedule": "Replanifier",
+  "Search": "Recherche",
+  "weeksleft": "Restantes", //"Semaines restantes",
+  "OneWeekleft": "Reste une semaine",
+  "youarein": "Semaine", //"Vous êtes dans la semaine ",
+  "listeappointment":
+      "Voici votre liste de rendez-vous. Les rendez-vous sont très importants pour garder votre bébé en bonne santé.",
+  "nbappointment": "Rendez-vous nombre ",
+  "dateappointment": "Le rendez-vous doit avoir lieu entre ces deux dates",
+  "weekappointment": "La semaine de grossesse",
+  "DateAaccouchment": "Date d'accouchment : ",
+  "myBookings": "Mes réservations",
   "Fondateur1": '''Je me présente , je suis "Farah Toumi" une Sage femme 
-fondateur de l'application "Bambino",
-Cette application Vous aidera à suivre votre grossesse semaine par semaine
-Elle va vous permettre de vous tenir à jour avec la croissance de votre bébé et va vous aider à être en forme tout au long de votre grossesse.
-Je suis là pour vous assurer le suivi médical des futures mères et du foetus. 
-Mais aussi pour préparer les couples à la naissance et à la parentalité.
-''',
+fondateur de l'application "Bambino",''',
   "Fondateur2":
-      '''De plus, notre orientation au cas du besoin à un médecin , un psychologue est amni  présente avec un encadrement bien précis.
-Encore, vu que notre objectif est votre confort, vous en profiter
-des consultations à domicile s'il est nécessaire.
-Pour plus d'information vous pouvez nous contacter sur WhatsApp où via l'application, on serait toujours à votre disposition .
+      '''Cette application Vous aidera à suivre votre grossesse semaine par semaine''',
+  "Fondateur3":
+      '''Elle va vous permettre de vous tenir à jour avec la croissance de votre bébé et va vous aider à être en forme tout au long de votre grossesse.''',
+  "Fondateur4":
+      '''Je suis là pour vous assurer le suivi médical des futures mères et du foetus.''',
+  "Fondateur5":
+      '''Mais aussi pour préparer les couples à la naissance et à la parentalité.''',
+  "Fondateur6":
+      '''De plus, notre orientation au cas du besoin à un médecin , un psychologue est amni  présente avec un encadrement bien précis.''',
+  "Fondateur7":
+      '''Encore, vu que notre objectif est votre confort, vous en profiter des consultations à domicile s'il est nécessaire.''',
+  "Fondateur8":
+      '''Pour plus d'information vous pouvez nous contacter sur WhatsApp où via l'application, on serait toujours à votre disposition.''',
+  "Fondateur9":
+      '''Votre santé et celle de votre bébé sont notre responsabilité ''',
 
-Votre santé et celle de votre bébé sont notre responsabilité ''',
-  "conseille1": '''Se reposer autant que possible pendant le 1er trimestre
+/* conseille1 preselectionne */
+
+  "conseille1": '''Se reposer autant que possible pendant le 1er trimestre.
 Pendant les premiers mois de grossesse, il n'est pas rare de se sentir fatiguée et d'avoir plus souvent envie de dormir. 
 En cause, le bouleversement hormonal qui s'opère dans votre corps de future maman. L'augmentation subite des taux de progestérone en particulier, va être à la source d'une somnolence accrue en journée et d'un sommeil perturbé pendant la nuit. 
 Et le meilleur moyen de faire face à cette fatigue inhabituelle est de se reposer autant que possible. N'hésitez pas à vous accorder des siestes récupératrices ou des grasses matinées quand vous le pouvez, le tout sans culpabilité : les tâches ménagères attendront. 

@@ -1,7 +1,7 @@
-import 'package:bambino/Model/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../Model/Classes/doctor_model.dart';
 import '../../../../Setting/Colors/colorsSetting.dart';
 import '../../../../Setting/Lists/DoctorList.dart';
 import '../../../Widget/DoctorCard_Widget.dart';
@@ -30,11 +30,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(4),
-                  child: Container(
-                    height: Get.height * 0.065,
-                    width: double.infinity,
-                    color: ConstantColor().grey1,
-                  ),
+                  child: inputFidlRecher(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(4),
@@ -226,6 +222,43 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget inputFidlRecher() {
+    return TextFormField(
+        decoration:
+            DecorationWidget(context, "${"Search".tr} ...", Icons.search));
+  }
+
+  InputDecoration DecorationWidget(BuildContext context, String text, icon) {
+    return InputDecoration(
+      fillColor: Colors.grey.withOpacity(.1),
+      //filled: true,
+      prefixIcon: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Icon(
+          icon,
+          size: 20,
+          color: ConstantColor().darkblue,
+        ),
+      ),
+      label: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Text(
+          text,
+          style: TextStyle(color: ConstantColor().grey4),
+        ),
+      ),
+      contentPadding: EdgeInsets.zero,
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: ConstantColor().darkblue),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: ConstantColor().darkblue),
+        borderRadius: BorderRadius.circular(14),
       ),
     );
   }
